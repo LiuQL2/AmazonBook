@@ -1,0 +1,13 @@
+/data/*
+/configuration/settings2.py
+/.idea/*
+
+**/*.py[co]
+/.DS_Store
+**/**/**/*.py[co]
+**/__pycache__/
+**/**/__pycache__/
+**/.DS_Store
+**/**/.DS_Store
+**/**/**/.DS_Store
+**/**/**/**/.DS_Store
