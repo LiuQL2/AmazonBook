@@ -5,7 +5,7 @@ import json
 import traceback
 import os, sys
 sys.path.append(os.getcwd().replace("spiders",""))
-from spiders import BaseSpider
+from spiders.BaseSpider import BaseSpider
 from configuration.settings import USE_PROXY as use_proxy
 
 
@@ -25,7 +25,7 @@ class UsedBookSpider(BaseSpider):
         """
         self._get_page_url()
         for url in self.used_page_urls:
-            print "used page_url", url
+            print("used page_url", url)
             selector = self.process_url_request(url=url,use_proxy=use_proxy)
             if selector != None:
                 book_selector_list = selector.xpath('//*[@id="olpOfferList"]/div/div/div[@class="a-row a-spacing-mini olpOffer"]')
@@ -69,8 +69,8 @@ class UsedBookSpider(BaseSpider):
             book["seller_url"] = "https://www.amazon.com" + seller_url
             return book
 
-        except Exception, e:
-            print traceback.format_exc(), e.message
+        except Exception as e:
+            print(traceback.format_exc(), e.args[0])
             return None
 
     def _get_page_url(self):

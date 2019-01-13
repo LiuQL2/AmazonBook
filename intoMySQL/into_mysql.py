@@ -33,10 +33,10 @@ class IntoMySQL(object):
             try:
                 if book["amazon_price"] < book["lowest_used_price"]:
                     line = json.loads(line)
-                    print "#############"
-                    print json.dumps(line,indent=2)
-            except Exception, e:
-                print traceback.format_exc(), e.message
+                    print("#############")
+                    print(json.dumps(line,indent=2))
+            except Exception as e:
+                print(traceback.format_exc(), e.args[0])
 
             # if book["ISBN_13"] is not None and book["ISBN_10"] is not None:
             #     self.mysql.insert(table=self.book_table, record=book)
@@ -64,5 +64,5 @@ if __name__ == "__main__":
     mysql = IntoMySQL(book_table=book_talbe,used_book_table=used_book_table)
     mysql.write_mysql(data_file_name=data_file)
     mysql.mysql.close()
-    print "total:", mysql.total_number
-    print "drop :", mysql.drop_number
+    print("total:", mysql.total_number)
+    print("drop :", mysql.drop_number)

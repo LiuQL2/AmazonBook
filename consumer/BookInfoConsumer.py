@@ -20,9 +20,9 @@ class BookInfoConsumer(RabbitmqConsumer):
         super(BookInfoConsumer, self).__init__(queue=queue, queue_durable=queue_durable)
 
     def callback(self, ch, method, properties, body):
-        print '[X] get url: %s' % body
+        print('[X] get url: %s' % body)
         record = json.loads(body)
-        print json.dumps(record, indent=2)
+        print(json.dumps(record, indent=2))
         message = body.replace("/n","")
         FileIO.writeToFile(text=message, filename="./../data/book_info.json")
 
@@ -35,7 +35,7 @@ class BookInfoConsumer(RabbitmqConsumer):
                                    exchange_type=book_info_bkup_queue_exchange['exchange_type'])
 
         ch.basic_ack(delivery_tag=method.delivery_tag)
-        print 'sleeping...'
+        print('sleeping...')
         self.connection.sleep(time_sleep*0.05)
 
 

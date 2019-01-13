@@ -70,7 +70,7 @@ BOOK_INFO_BKUP_QUEUE_EXCHANGE = dict(
 代理设置。
 """
 #是否使用代理服务器
-USE_PROXY = True
+USE_PROXY = False
 #配置ip代理服务器
 PROXIES = [
     # "http://username:password@ip:port/",

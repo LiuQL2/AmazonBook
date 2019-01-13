@@ -4,8 +4,7 @@ import time
 import os
 import sys
 import json
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 
 def get_dirlist(path,key_word_list = None, no_key_word_list = None):
     file_name_list = os.listdir(path)#获得原始json文件所在目录里面的所有文件名称

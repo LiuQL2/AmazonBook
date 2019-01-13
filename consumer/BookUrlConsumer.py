@@ -5,10 +5,10 @@ import os
 import json
 sys.path.append(os.getcwd().replace("consumer",""))
 
-from configuration import BOOK_URL_QUEUE_EXCHANGE as book_url_queue_exchange
-from configuration import USE_PROXY as use_proxy
-from configuration import TIME_SLEEP as time_sleep
-from database import RabbitmqConsumer
+from configuration.settings import BOOK_URL_QUEUE_EXCHANGE as book_url_queue_exchange
+from configuration.settings import USE_PROXY as use_proxy
+from configuration.settings import TIME_SLEEP as time_sleep
+from database.RabbitMQ import RabbitmqConsumer
 from spiders.BookInfoSpider import BookInfoSpider
 
 
@@ -20,12 +20,12 @@ class BookUrlConsumer(RabbitmqConsumer):
         super(BookUrlConsumer, self).__init__(queue=queue, queue_durable=queue_durable)
 
     def callback(self, ch, method, properties, body):
-        print '[X] get url: %s' % body
+        print('[X] get url: %s' % body)
         url_count = json.loads(body)
         book_spider = BookInfoSpider(url_count = url_count ,use_proxy=use_proxy)
         book_spider.parse()#该方法将获得页面url保存到rabbitmq服务器对应的队列中。
         ch.basic_ack(delivery_tag=method.delivery_tag)
-        print 'sleeping...'
+        print('sleeping...')
         self.connection.sleep(time_sleep)
 
 
